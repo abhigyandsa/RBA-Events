@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "686437319963",
+    "project_id": "rb-atharv",
+    "storage_bucket": "rb-atharv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686437319963:android:ac4714e8b911149af13fbe",
+        "android_client_info": {
+          "package_name": "com.example.rba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686437319963-63au5bn812tr57omfndhemnqhmbn6u4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_c0TWHoQ3fMhLINZacbIsAkU72qf6zGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686437319963-63au5bn812tr57omfndhemnqhmbn6u4u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "686437319963-ff9obo0vb3fgjmtq9qnaa578db56e6un.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.rba"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
