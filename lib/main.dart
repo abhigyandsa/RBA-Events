@@ -4,6 +4,7 @@ import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 
 void main() async{
@@ -118,6 +119,10 @@ class UserListScreen extends StatelessWidget {
 }
 
 Future<UserCredential> signInWithGoogle() async {
+  if (kIsWeb){
+    GoogleAuthProvider googleProvider = GoogleAuthProvider();
+    return await FirebaseAuth.instance.signInWithPopup(googleProvider);
+  }
   // Trigger the authentication flow
   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
