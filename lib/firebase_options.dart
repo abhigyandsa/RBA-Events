@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '686437319963',
     projectId: 'rb-atharv',
     storageBucket: 'rb-atharv.appspot.com',
+    androidClientId: '686437319963-a5vg68pj5tth0rpcmrtiqsks6khojtm8.apps.googleusercontent.com',
     iosClientId: '686437319963-ff9obo0vb3fgjmtq9qnaa578db56e6un.apps.googleusercontent.com',
     iosBundleId: 'com.example.rba',
   );
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '686437319963',
     projectId: 'rb-atharv',
     storageBucket: 'rb-atharv.appspot.com',
+    androidClientId: '686437319963-a5vg68pj5tth0rpcmrtiqsks6khojtm8.apps.googleusercontent.com',
     iosClientId: '686437319963-ff9obo0vb3fgjmtq9qnaa578db56e6un.apps.googleusercontent.com',
     iosBundleId: 'com.example.rba',
   );
