@@ -57,25 +57,29 @@ class MyHomePage extends ConsumerWidget {
 
   final String title;
   Future<UserCredential> signInWithGoogle() async {
-      if (kIsWeb){
-        GoogleAuthProvider googleProvider = GoogleAuthProvider();
-        return await FirebaseAuth.instance.signInWithPopup(googleProvider);
-      }
-      // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      // Once signed in, return the UserCredential
-      return await FirebaseAuth.instance.signInWithCredential(credential);
+    if (kIsWeb){
+      GoogleAuthProvider googleProvider = GoogleAuthProvider();
+      return await FirebaseAuth.instance.signInWithPopup(googleProvider);
     }
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+  Future<void> signOut() async {
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -104,6 +108,11 @@ class MyHomePage extends ConsumerWidget {
           ),
           FloatingActionButton(
             onPressed: () => ref.read(userProvider.notifier).state = 'some value',
+            tooltip: 'Change Value',
+            child: Icon(Icons.change_circle),
+          ),
+          FloatingActionButton(
+            onPressed: signOut,
             tooltip: 'Log Out',
             child: Icon(Icons.logout),
           ),
