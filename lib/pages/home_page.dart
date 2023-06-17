@@ -1,7 +1,7 @@
-import 'package:bijan_i/pages/login_page.dart';
-import 'package:bijan_i/providers/fakeuser.dart';
-import 'package:bijan_i/providers/qrdata.dart';
-import 'package:bijan_i/widgets/cute_qrcode.dart';
+import 'package:rba/pages/login_page.dart';
+import 'package:rba/providers/qr_data_provider.dart';
+import 'package:rba/providers/user_provider.dart';
+import 'package:rba/widgets/cute_qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';

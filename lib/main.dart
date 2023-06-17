@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rba/pages/home_page.dart';
 import 'package:rba/pages/login_page.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'firebase_options.dart';
@@ -37,15 +38,25 @@ class MyApp extends ConsumerWidget {
     });
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'RBA Events',
       initialRoute: '/',
+      theme: ThemeData.from(
+         colorScheme: ColorScheme.fromSeed(
+           seedColor: Color.fromRGBO(8, 103, 136, 1),
+           background: Color.fromRGBO(255, 241, 208, 1),
+           secondary: Color.fromRGBO(240, 200, 8, 1),
+           primary: Color.fromRGBO(8, 103, 136, 1),
+           tertiary: Color.fromRGBO(6, 174, 213, 1),
+           error: Color.fromRGBO(221, 28, 26, 1),
+          )),
       routes: {
         '/login': (context) => const LoginPage(),
         '/main': (context) => const MyHomePage(
               title: 'RBA Events',
             ),
       },
-      home: const LoginPage(),
+      home: const StartPage(),
     );
   }
 }
