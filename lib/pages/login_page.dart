@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rba/my_home_page.dart';
+
+import '../services/firebase_auth_helper.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -36,8 +37,8 @@ class LoginPage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () async {
-                    await const MyHomePage(title: 'a').signInWithGoogle();
-                    Navigator.of(context).popAndPushNamed('/home');
+                    await FirebaseAuthHelper.signInWithGoogle();
+                    Navigator.of(context).popAndPushNamed('/main');
                   },
                   child: Ink(
                     color: const Color(0xFF397AF3),
