@@ -5,9 +5,8 @@ import 'package:rba/widgets/cute_qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
-
-import '../widgets/qr_scanner.dart';
-import '../widgets/textfield_withqr.dart';
+import 'package:rba/widgets/qr_scanner.dart';
+import 'package:rba/widgets/textfield_withqr.dart';
 
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});

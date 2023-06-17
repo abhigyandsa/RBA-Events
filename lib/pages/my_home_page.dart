@@ -9,7 +9,7 @@ class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String value = ref.watch(userProvider);
@@ -28,7 +28,6 @@ class MyHomePage extends ConsumerWidget {
               value,
               style: const TextStyle(fontSize: 24),
             ),
-            const UserListScreen(),
             const UserInformation(),
           ],
         ),
@@ -54,44 +53,6 @@ class MyHomePage extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class UserListScreen extends StatelessWidget {
-  const UserListScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('users').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
-
-        if (!snapshot.hasData) {
-          return const CircularProgressIndicator();
-        }
-
-        final userList = snapshot.data?.docs ?? [];
-        return ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: userList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final userData = userList[index].data() ?? {};
-            final name = (userData as Map)['name'];
-            return ListTile(
-              title: Text(name ?? ''),
-            );
-          },
-        );
-      },
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rba/providers/user_provider.dart';
+import 'package:rba/services/firebase_auth_helper.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -17,7 +18,7 @@ class LoginPage extends StatelessWidget {
             alignment: Alignment.topRight,
             child: Container(
               height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/wavy_background.png'),
                   fit: BoxFit.fill,
@@ -46,7 +47,7 @@ class LoginPage extends StatelessWidget {
             alignment: Alignment.center,
             child: Column(
               children: [
-                Spacer(),
+                const Spacer(),
                 //need to add Sized boxes for this more buttons.
                 Consumer(builder: (context, ref, child) {
                   return OutlinedButton(
@@ -59,22 +60,23 @@ class LoginPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
-                    onPressed: () {
-                      ref.read(userProvider.notifier).state = 'not default';
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => HomePage(),
-                        ),
-                      );
+                    onPressed: () async {
+                      await FirebaseAuthHelper.signInWithGoogle();
+                      if (ref.read(userProvider) != 'default') {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => StartPage()),
+                          (route) => false,
+                        );
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          FaIcon(FontAwesomeIcons.google),
-                          SizedBox(width: 15),
+                          const FaIcon(FontAwesomeIcons.google),
+                          const SizedBox(width: 15),
                           Text(
                             "Login with Google",
                             style:
@@ -88,7 +90,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   );
                 }),
-                Spacer(),
+                const Spacer(),
               ],
             ),
           )

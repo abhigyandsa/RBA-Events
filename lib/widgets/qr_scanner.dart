@@ -69,7 +69,10 @@ class _ScannerState extends ConsumerState<Scanner> {
           final List<Barcode> barcodes = capture.barcodes;
           ref.read(qrdataProvider.notifier).state =
               barcodes[barcodes.length - 1].rawValue;
-          Navigator.popUntil(context, (Route<dynamic> route) => route.isFirst);
+          Navigator.popUntil(
+              context,
+              (Route<dynamic> route) =>
+                  route.isFirst); //should only pop until scanner launched
         },
       ),
     );
