@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/firebase_auth_helper.dart';
+import 'package:rba/widgets/user_information.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key, required this.title});
@@ -12,6 +13,11 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String value = ref.watch(userProvider);
+    ref.listen(userProvider, (String? previous, String value) {
+      if (value == "default") {
+        Navigator.pushNamed(context, '/login');
+      }
+    });
     return Scaffold(
       body: Center(
         child: Column(
@@ -23,6 +29,7 @@ class MyHomePage extends ConsumerWidget {
               style: const TextStyle(fontSize: 24),
             ),
             const UserListScreen(),
+            const UserInformation(),
           ],
         ),
       ),

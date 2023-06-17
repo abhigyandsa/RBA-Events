@@ -6,7 +6,7 @@ import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'my_home_page.dart';
+import 'pages/my_home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,9 +45,6 @@ class MyApp extends ConsumerWidget {
               title: 'RBA Events',
             ),
       },
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
       home: const LoginPage(),
     );
   }
