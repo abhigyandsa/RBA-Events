@@ -1,43 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-
-final userProvider = StateProvider((ref) => 'default');
+import 'package:rba/providers/user_provider.dart';
+import 'package:rba/services/firebase_auth_helper.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
-  Future<UserCredential> signInWithGoogle() async {
-    if (kIsWeb) {
-      GoogleAuthProvider googleProvider = GoogleAuthProvider();
-      return await FirebaseAuth.instance.signInWithPopup(googleProvider);
-    }
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
-
-  Future<void> signOut() async {
-    await GoogleSignIn().signOut();
-    await FirebaseAuth.instance.signOut();
-  }
-
+  
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String value = ref.watch(userProvider);
@@ -59,7 +30,7 @@ class MyHomePage extends ConsumerWidget {
         direction: Axis.horizontal,
         children: [
           FloatingActionButton(
-            onPressed: signInWithGoogle,
+            onPressed: FirebaseAuthHelper.signInWithGoogle,
             tooltip: 'Log In',
             child: Icon(Icons.login),
           ),
@@ -70,7 +41,7 @@ class MyHomePage extends ConsumerWidget {
             child: Icon(Icons.change_circle),
           ),
           FloatingActionButton(
-            onPressed: signOut,
+            onPressed: FirebaseAuthHelper.signOut,
             tooltip: 'Log Out',
             child: Icon(Icons.logout),
           ),

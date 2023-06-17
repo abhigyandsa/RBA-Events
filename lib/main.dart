@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rba/pages/login_page.dart';
+import 'package:rba/providers/user_provider.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'my_home_page.dart';
 
 void main() async {
@@ -30,9 +30,9 @@ class MyApp extends ConsumerWidget {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       print("trigger");
       if (user == null) {
-        ref.read(userProvider.notifier).state = 'Logged Out';
+        ref.read(userProvider.notifier).state = 'default';
       } else {
-        ref.read(userProvider.notifier).state = user.email ?? 'Logged Out';
+        ref.read(userProvider.notifier).state = user.email ?? 'default';
       }
     });
 
@@ -40,10 +40,8 @@ class MyApp extends ConsumerWidget {
       title: 'RBA Events',
       initialRoute: '/',
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
         '/login': (context) => const LoginPage(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
-        '/home': (context) => const MyHomePage(
+        '/main': (context) => const MyHomePage(
               title: 'RBA Events',
             ),
       },
@@ -54,44 +52,6 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   User? _user;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     FirebaseAuth.instance.authStateChanges().listen((User? user) {
-//       setState(() {
-//         _user = user;
-//       });
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(widget.title),
-//             Text(
-//               _user != null ? 'Logged in as: ${_user!.email}' : 'Logged out',
-//               style: const TextStyle(fontSize: 24),
-//             ),
-//             const UserListScreen(),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: const FloatingActionButton(
-//         onPressed: signInWithGoogle,
-//         tooltip: 'Increment',
-//         child: Icon(Icons.check),
-//       ),
-//     );
-//   }
-// }
 
 class UserListScreen extends StatelessWidget {
   const UserListScreen({super.key});
