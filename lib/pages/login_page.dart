@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rba/services/firebase_auth_helper.dart';
+import 'package:rba/widgets/my_outline_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -16,7 +17,7 @@ class LoginPage extends StatelessWidget {
             alignment: Alignment.topRight,
             child: Container(
               height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/wavy_background.png'),
                   fit: BoxFit.fill,
@@ -42,46 +43,61 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment.center,
+            alignment: Alignment.bottomCenter,
             child: Column(
               children: [
-                const Spacer(),
+                Spacer(),
                 //need to add Sized boxes for this more buttons.
                 Consumer(builder: (context, ref, child) {
-                  return OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                        width: 2,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                    onPressed: () async {
-                      await FirebaseAuthHelper.signInWithGoogle();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const FaIcon(FontAwesomeIcons.google),
-                          const SizedBox(width: 15),
-                          Text(
-                            "Login with Google",
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontSize: 25,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                          ),
-                        ],
-                      ),
+                  return IntrinsicWidth(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        MyOutlineButton(
+                            onPressed: () async {
+                              await FirebaseAuthHelper.signInWithGoogle();
+                            },
+                            icon: FaIcon(FontAwesomeIcons.google),
+                            text: "Google"),
+                        SizedBox(height: 12),
+                        MyOutlineButton(
+                            onPressed: () async {
+                              await FirebaseAuthHelper.signInWithGoogle();
+                            },
+                            icon: FaIcon(FontAwesomeIcons.microsoft),
+                            text: "Microsoft"),
+                        SizedBox(height: 12),
+                        MyOutlineButton(
+                            onPressed: () async {
+                              await FirebaseAuthHelper.signInWithGoogle();
+                            },
+                            icon: FaIcon(FontAwesomeIcons.facebook),
+                            text: "Facebook"),
+                      ],
                     ),
                   );
                 }),
-                const Spacer(),
+                SizedBox(height: 104),
+                Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.water,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text('Made with Bacon!'),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           )
