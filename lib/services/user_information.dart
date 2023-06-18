@@ -1,27 +1,31 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class UserInformation {
-  String? name;
+  final String? name;
   final String email;
-  String? phone;
+  final String? phone;
+  final int? adminlevel;
 
-  UserInformation({
+  const UserInformation({
     required this.email,
+    this.name,
+    this.phone,
+    this.adminlevel,
   });
 
-  Future<void> getUserInformation(String email) async {
-    final userInformation = await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: email)
-        .get();
+  // Future<Map<String, dynamic>> getUserInformation(String email) async {
+  //   final userInformation = await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .where('email', isEqualTo: email)
+  //       .get();
 
-    final userInformationData = userInformation.docs.first.data();
-    name = userInformationData['name'];
-    phone = userInformationData['phone'];
-  }
+  //   return userInformation.docs.first.data();
+  //   // name = userInformationData['name'];
+  //   // phone = userInformationData['phone'];
+  // }
 
   Future<void> postUserInformation() async {
     await FirebaseFirestore.instance.collection('users').add({
@@ -29,6 +33,11 @@ class UserInformation {
       'name': name,
       'phone': phone,
     });
+  }
+
+  @override
+  String toString() {
+    return 'UserInformation{email: $email, name: $name, phone: $phone, adminlevel: $adminlevel}';
   }
 }
 

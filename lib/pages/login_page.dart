@@ -1,8 +1,6 @@
-import 'package:rba/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/firebase_auth_helper.dart';
 
 class LoginPage extends StatelessWidget {

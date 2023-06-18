@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:rba/pages/home_page.dart';
 import 'package:rba/pages/login_page.dart';
 import 'package:rba/providers/user_provider.dart';
+import 'package:rba/services/user_information.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,9 +30,19 @@ class MyApp extends ConsumerWidget {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       print("trigger");
       if (user == null) {
-        ref.read(userProvider.notifier).state = 'default';
+        ref.read(userProvider.notifier).setNull();
       } else {
-        ref.read(userProvider.notifier).state = user.email ?? 'default';
+        if (user.email == null) {
+          ref.read(userProvider.notifier).setNull();
+        } else {
+          ref.read(userProvider.notifier).initUsrData(user.email!);
+        }
+      }
+    });
+
+    ref.listen<UserInformation?>(userProvider, (previous, value) {
+      if (previous == null && value != null) {
+        ref.read(userProvider.notifier).getnsetData();
       }
     });
 
