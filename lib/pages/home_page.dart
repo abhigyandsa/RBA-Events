@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rba/pages/login_page.dart';
 import 'package:rba/providers/qr_data_provider.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/firebase_auth_helper.dart';
+import 'package:rba/services/user_information.dart';
 import 'package:rba/widgets/cute_qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,8 +28,33 @@ class HomePage2 extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
     return Scaffold(
-      body:
-          Center(child: Text(user.toString(), style: TextStyle(fontSize: 30))),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            user.toString(),
+            style: TextStyle(fontSize: 11),
+          ),
+          TextButton(
+            onPressed: () async {
+              UserInformation ui = UserInformation(
+                  email: "i21jains@iimidr.ac.in",
+                  name: "Saumya J",
+                  phone: "9833780180",
+                  adminlevel: 9);
+              UserInformation ui2 = UserInformation(
+                  email: "abhigyandsa@gmail.com",
+                  name: "Abhigyan D",
+                  phone: "9875340025",
+                  adminlevel: 9);
+              await ui.postUserInformation();
+              await ui2.postUserInformation();
+            },
+            child: Text('Post'),
+          ),
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await FirebaseAuthHelper.signOut();

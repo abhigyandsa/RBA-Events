@@ -27,10 +27,27 @@ class UserInformation {
   // }
 
   Future<void> postUserInformation() async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'email': email,
-      'name': name,
-      'phone': phone,
+    var db = FirebaseFirestore.instance;
+    var flag = false;
+    await db.collection("users").get().then((event) {
+      for (var doc in event.docs) {
+        if (doc.data()['email'] == email) {
+          doc.reference.update({
+            'name': name,
+            'phone': phone,
+            'adminlevel': adminlevel,
+          });
+          flag = true;
+        }
+      }
+      if (flag == false) {
+        db.collection("users").add({
+          'name': name,
+          'email': email,
+          'phone': phone,
+          'adminlevel': adminlevel,
+        });
+      }
     });
   }
 
