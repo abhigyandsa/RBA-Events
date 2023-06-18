@@ -11,6 +11,31 @@ class QRCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: PrettyQr(
+        // image: AssetImage('assets/2ndiris.png'),
+        // typeNumber: 3,
+        size: 256,
+        data: text,
+        errorCorrectLevel: QrErrorCorrectLevel.H,
+        roundEdges: true,
+        elementColor: Theme.of(context).colorScheme.primary,
+      ),
+    );
+  }
+}
+
+class QRCode2 extends StatelessWidget {
+  const QRCode2({
+    super.key,
+    required this.text,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

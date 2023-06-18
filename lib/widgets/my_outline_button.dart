@@ -38,9 +38,9 @@ class MyOutlineButton extends StatelessWidget {
             Text(
               text,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontSize: 25,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  fontSize: 25,
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w400),
             ),
           ],
         ),
