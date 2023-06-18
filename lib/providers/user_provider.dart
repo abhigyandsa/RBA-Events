@@ -30,6 +30,7 @@ class UserNotifier extends Notifier<UserInformation?> {
         }
       }
     });
+
     // final userInformation = await FirebaseFirestore.instance
     //     .collection('users')
     //     .where('email', isEqualTo: email)

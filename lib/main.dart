@@ -43,6 +43,10 @@ class MyApp extends ConsumerWidget {
     ref.listen<UserInformation?>(userProvider, (previous, value) {
       if (previous == null && value != null) {
         ref.read(userProvider.notifier).getUsrData();
+      } else if (previous != null &&
+          value != null &&
+          previous.email != value.email) {
+        ref.read(userProvider.notifier).getUsrData();
       }
     });
 
