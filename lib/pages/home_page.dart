@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:rba/widgets/qr_scanner.dart';
 import 'package:rba/widgets/textfield_withqr.dart';
-import 'package:rba/widgets/user_information.dart';
 
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
@@ -16,7 +15,25 @@ class StartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final value = ref.watch(userProvider);
-    return value == 'default' ? LoginPage() : HomePage();
+    return value == null ? LoginPage() : HomePage2();
+  }
+}
+
+class HomePage2 extends ConsumerWidget {
+  const HomePage2({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
+    return Scaffold(
+      body:
+          Center(child: Text(user.toString(), style: TextStyle(fontSize: 30))),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await FirebaseAuthHelper.signOut();
+        },
+      ),
+    );
   }
 }
 
@@ -113,8 +130,8 @@ class HomePage extends StatelessWidget {
                 qrCode != 'default'
                     ? Column(
                         children: [
-                          QRCode(text: qrCode),
-                          Text(qrCode),
+                          QRCode(text: qrCode?.email ?? 'default'),
+                          Text(qrCode?.email ?? 'default'),
                         ],
                       )
                     : SizedBox.shrink()
