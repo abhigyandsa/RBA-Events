@@ -1,12 +1,14 @@
 import 'package:rba/pages/login_page.dart';
 import 'package:rba/providers/qr_data_provider.dart';
 import 'package:rba/providers/user_provider.dart';
+import 'package:rba/services/firebase_auth_helper.dart';
 import 'package:rba/widgets/cute_qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:rba/widgets/qr_scanner.dart';
 import 'package:rba/widgets/textfield_withqr.dart';
+import 'package:rba/widgets/user_information.dart';
 
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
@@ -29,10 +31,6 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'Hello!',
-            style: Theme.of(context).textTheme.displayLarge,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -70,6 +68,18 @@ class HomePage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(Icons.sailing_rounded),
+                ),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await FirebaseAuthHelper.signOut();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.logout_outlined),
                 ),
               ),
             ],
@@ -110,8 +120,8 @@ class HomePage extends StatelessWidget {
                     : SizedBox.shrink()
               ],
             );
-          })
-        ],
+          }),
+        ], // children
       ),
     );
   }
