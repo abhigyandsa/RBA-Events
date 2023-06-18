@@ -1,3 +1,4 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rba/pages/login_page.dart';
 import 'package:rba/providers/qr_data_provider.dart';
 import 'package:rba/providers/user_provider.dart';
@@ -7,6 +8,7 @@ import 'package:rba/widgets/cute_qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
+import 'package:rba/widgets/mydrawer.dart';
 import 'package:rba/widgets/qr_scanner.dart';
 import 'package:rba/widgets/textfield_withqr.dart';
 
@@ -26,6 +28,7 @@ class HomePage2 extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
+
     return Scaffold(
       body: Center(
           child: Column(
@@ -54,10 +57,25 @@ class HomePage2 extends ConsumerWidget {
           ),
         ],
       )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await FirebaseAuthHelper.signOut();
-        },
+      extendBodyBehindAppBar: true,
+      drawer: MyDrawer(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        leading: Builder(
+          builder: (context) => TextButton(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FaIcon(
+                FontAwesomeIcons.circleUser,
+                color: Theme.of(context).colorScheme.primary,
+                size: 40,
+              ),
+            ),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+        toolbarHeight: 80,
       ),
     );
   }
@@ -153,11 +171,11 @@ class HomePage extends StatelessWidget {
                         ],
                       )
                     : const SizedBox.shrink(),
-                qrCode != 'default'
+                qrCode != null
                     ? Column(
                         children: [
-                          QRCode(text: qrCode?.email ?? 'default'),
-                          Text(qrCode?.email ?? 'default'),
+                          QRCode(text: qrCode.email),
+                          Text(qrCode.email),
                         ],
                       )
                     : const SizedBox.shrink()
