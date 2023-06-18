@@ -62,13 +62,6 @@ class LoginPage extends StatelessWidget {
                     ),
                     onPressed: () async {
                       await FirebaseAuthHelper.signInWithGoogle();
-                      if (ref.read(userProvider) != 'default') {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (_) => StartPage()),
-                          (route) => false,
-                        );
-                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -99,18 +92,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
-
-//void main() {
-//  runApp(
-//    ProviderScope(
-//      child: MaterialApp(
-//        debugShowCheckedModeBanner: false,
-//        home: StartPage(),
-//        // routes: ,
-       
-//        ),
-//      ),
-//    ),
-//  );
-//}
