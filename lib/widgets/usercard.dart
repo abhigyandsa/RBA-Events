@@ -46,12 +46,12 @@ class UserCard extends StatelessWidget {
                     Text(
                       user.phone ?? '+91 1234567890',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                     ),
                     Text(user.email,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).colorScheme.primary,
                             )),
                     SizedBox(
                       height: 256 + 8,

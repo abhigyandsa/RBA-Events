@@ -21,7 +21,7 @@ class MyOutlineButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         side: BorderSide(
           width: 2,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -39,7 +39,7 @@ class MyOutlineButton extends StatelessWidget {
               text,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontSize: 25,
-                  color: Theme.of(context).primaryColor,
+                  // color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w400),
             ),
           ],
