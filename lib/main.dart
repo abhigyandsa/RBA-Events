@@ -57,7 +57,8 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData.from(
           colorScheme: ColorScheme.fromSeed(
         seedColor: const Color.fromRGBO(8, 103, 136, 1),
-        background: const Color.fromRGBO(255, 241, 208, 1),
+        // background: const Color.fromRGBO(255, 241, 208, 1),
+        background: const Color.fromRGBO(255, 255, 255, 1),
         secondary: const Color.fromRGBO(240, 200, 8, 1),
         primary: const Color.fromRGBO(8, 103, 136, 1),
         tertiary: const Color.fromRGBO(6, 174, 213, 1),

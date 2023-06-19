@@ -58,25 +58,35 @@ class HomePage2 extends ConsumerWidget {
         ],
       )),
       extendBodyBehindAppBar: true,
-      drawer: MyDrawer(),
+      endDrawer: const MyDrawer(),
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        leading: Builder(
-          builder: (context) => TextButton(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FaIcon(
-                FontAwesomeIcons.circleUser,
-                color: Theme.of(context).colorScheme.primary,
-                size: 40,
+          elevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Scanner(),
+                  ),
+                );
+              },
+              child: const FaIcon(FontAwesomeIcons.cameraRetro),
+            ),
+            Builder(
+              builder: (context) => TextButton(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FaIcon(
+                    FontAwesomeIcons.userLarge,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
               ),
             ),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
-        toolbarHeight: 80,
-      ),
+          ]),
     );
   }
 }

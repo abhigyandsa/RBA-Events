@@ -77,7 +77,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   );
                 }),
-                const SizedBox(height: 104),
+                const SizedBox(height: 164),
                 Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: TextButton(
