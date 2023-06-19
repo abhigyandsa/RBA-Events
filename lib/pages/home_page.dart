@@ -24,6 +24,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
+    final admin = user?.adminlevel ?? 0;
 
     return Scaffold(
       drawer: const ThemeDrawer(),
@@ -60,17 +61,19 @@ class HomePage extends ConsumerWidget {
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.background,
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Scanner(),
-                  ),
-                );
-              },
-              child: const FaIcon(FontAwesomeIcons.cameraRetro),
-            ),
+            admin > 9
+                ? TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Scanner(),
+                        ),
+                      );
+                    },
+                    child: const FaIcon(FontAwesomeIcons.cameraRetro),
+                  )
+                : const SizedBox.shrink(),
             Builder(
               builder: (context) => TextButton(
                 child: Padding(
