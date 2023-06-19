@@ -38,7 +38,9 @@ class MyApp extends ConsumerWidget {
         if (user.email == null) {
           ref.read(userProvider.notifier).setNull();
         } else {
-          ref.read(userProvider.notifier).initUsrData(user.email!);
+          ref
+              .read(userProvider.notifier)
+              .initUsrData(user.email!); // auth state changing to same
         }
       }
     });

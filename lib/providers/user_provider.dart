@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rba/services/firebase_auth_helper.dart';
 import 'package:rba/services/user_information.dart';
 
 final userProvider =
@@ -46,7 +47,11 @@ class UserNotifier extends Notifier<UserInformation?> {
           );
         });
         docRef.snapshots().listen(
-          (event) {
+          (event) async {
+            if (event.data()?['email'] != email) {
+              await FirebaseAuthHelper.signOut();
+              return;
+            }
             state = UserInformation(
               email: email,
               name: event.data()?['name'],
