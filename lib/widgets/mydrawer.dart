@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lottie/lottie.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/firebase_auth_helper.dart';
-
-import 'cute_qrcode.dart';
+import 'package:rba/widgets/usercard.dart';
 
 class MyDrawer extends ConsumerWidget {
   const MyDrawer({
@@ -15,8 +13,6 @@ class MyDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
-    const double circleRadius = 100.0;
-    const double circleBorderWidth = 8.0;
 
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -40,80 +36,11 @@ class MyDrawer extends ConsumerWidget {
                       ),
                 )),
           ),
-          user != null
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Stack(alignment: Alignment.topCenter, children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: circleRadius / 2.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(32),
-                        ),
-                        color: Theme.of(context).colorScheme.background,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 56.0),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    user.name ?? 'N/A',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall
-                                        ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                            fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    user.phone ?? '+91 1234567890',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                  ),
-                                  Text(user.email,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                          )),
-                                  SizedBox(
-                                    height: 256 + 8,
-                                    child: QRCode(text: user.email),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: circleRadius,
-                      height: circleRadius,
-                      child: Padding(
-                          padding: const EdgeInsets.all(circleBorderWidth),
-                          child:
-                              Lottie.asset('assets/lottie/female-avatar.json')),
-                    ),
-                  ]),
-                )
-              : const Text('No User Logged In'),
-          // const Spacer(),
-          const SizedBox(height: 274),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: UserCard(user: user!),
+          ),
+          const Spacer(),
           FilledButton(
             onPressed: () async {
               await FirebaseAuthHelper.signOut();

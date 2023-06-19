@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rba/widgets/qr_overlay.dart';
 import '../providers/qr_data_provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -10,30 +11,29 @@ class Scanner extends ConsumerStatefulWidget {
 }
 
 class _ScannerState extends ConsumerState<Scanner> {
-  late final MobileScannerController cameraController;
+  late final MobileScannerController _cameraController;
 
   @override
   void initState() {
     super.initState();
-    cameraController = MobileScannerController();
+    _cameraController = MobileScannerController();
   }
 
   @override
   void dispose() {
     super.dispose();
-    cameraController.dispose();
+    _cameraController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mobile Scanner'),
+        title: const Text('QR Scanner'),
         actions: [
           IconButton(
-            color: Colors.white,
             icon: ValueListenableBuilder(
-              valueListenable: cameraController.torchState,
+              valueListenable: _cameraController.torchState,
               builder: (context, state, child) {
                 switch (state) {
                   case TorchState.off:
@@ -43,12 +43,11 @@ class _ScannerState extends ConsumerState<Scanner> {
                 }
               },
             ),
-            onPressed: () => cameraController.toggleTorch(),
+            onPressed: () => _cameraController.toggleTorch(),
           ),
           IconButton(
-            color: Colors.white,
             icon: ValueListenableBuilder(
-              valueListenable: cameraController.cameraFacingState,
+              valueListenable: _cameraController.cameraFacingState,
               builder: (context, state, child) {
                 switch (state) {
                   case CameraFacing.front:
@@ -58,22 +57,29 @@ class _ScannerState extends ConsumerState<Scanner> {
                 }
               },
             ),
-            onPressed: () => cameraController.switchCamera(),
+            onPressed: () => _cameraController.switchCamera(),
           ),
         ],
       ),
-      body: MobileScanner(
-        controller: cameraController,
-        fit: BoxFit.contain,
-        onDetect: (capture) {
-          final List<Barcode> barcodes = capture.barcodes;
-          ref.read(qrdataProvider.notifier).state =
-              barcodes[barcodes.length - 1].rawValue;
-          Navigator.popUntil(
-              context,
-              (Route<dynamic> route) =>
-                  route.isFirst); //should only pop until scanner launched
-        },
+      body: Stack(
+        alignment: FractionalOffset.center,
+        fit: StackFit.expand,
+        children: [
+          MobileScanner(
+            controller: _cameraController,
+            // fit: BoxFit.contain,
+            onDetect: (capture) {
+              final List<Barcode> barcodes = capture.barcodes;
+              ref.read(qrdataProvider.notifier).state =
+                  barcodes[barcodes.length - 1].rawValue;
+              Navigator.popUntil(
+                  context,
+                  (Route<dynamic> route) =>
+                      route.isFirst); //should only pop until scanner launched
+            },
+          ),
+          QRScannerOverlay(overlayColour: Colors.black.withOpacity(0.5)),
+        ],
       ),
     );
   }
