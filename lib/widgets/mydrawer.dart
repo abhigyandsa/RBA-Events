@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/firebase_auth_helper.dart';
-import 'package:rba/widgets/qr_scanner.dart';
 
 import 'cute_qrcode.dart';
 
@@ -75,7 +74,7 @@ class MyDrawer extends ConsumerWidget {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    user.phone ?? '+91 7872537510',
+                                    user.phone ?? '+91 1234567890',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyLarge
