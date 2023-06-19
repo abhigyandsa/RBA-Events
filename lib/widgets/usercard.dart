@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rba/services/user_information.dart';
 import 'package:rba/widgets/cute_qrcode.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
@@ -21,7 +22,7 @@ class UserCard extends StatelessWidget {
         child: Card(
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               width: 2,
             ),
             borderRadius: BorderRadius.circular(32),
@@ -31,23 +32,47 @@ class UserCard extends StatelessWidget {
             padding: const EdgeInsets.only(top: 56.0),
             child: Column(
               children: [
-                Text(
-                  user.name ?? 'N/A',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  user.phone ?? '+91 1234567890',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      TextScroll(
+                        user.name ?? 'N/A',
+                        velocity:
+                            const Velocity(pixelsPerSecond: Offset(40, 0)),
+                        delayBefore: const Duration(milliseconds: 2000),
+                        pauseBetween: const Duration(milliseconds: 3000),
+                        pauseOnBounce: const Duration(milliseconds: 1000),
+                        mode: TextScrollMode.bouncing,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold),
                       ),
+                      const SizedBox(height: 8),
+                      Text(
+                        user.phone ?? '+91 1234567890',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                      ),
+                      TextScroll(
+                        user.email,
+                        velocity:
+                            const Velocity(pixelsPerSecond: Offset(40, 0)),
+                        delayBefore: const Duration(milliseconds: 2000),
+                        pauseBetween: const Duration(milliseconds: 3000),
+                        pauseOnBounce: const Duration(milliseconds: 1000),
+                        mode: TextScrollMode.bouncing,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(user.email,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        )),
                 SizedBox(
                   height: 256 + 8,
                   child: QRCode(text: user.email),
@@ -60,9 +85,16 @@ class UserCard extends StatelessWidget {
       SizedBox(
         width: circleRadius,
         height: circleRadius,
-        child: Padding(
-            padding: const EdgeInsets.all(circleBorderWidth),
-            child: Lottie.asset('assets/lottie/female-avatar.json')),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(circleRadius),
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(2),
+            child: Lottie.asset('assets/lottie/female-avatar.json'),
+          ),
+        ),
       ),
     ]);
   }

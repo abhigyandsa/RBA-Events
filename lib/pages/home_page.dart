@@ -1,5 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rba/pages/login_page.dart';
+import 'package:rba/providers/theme_provider.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/user_information.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class HomePage extends ConsumerWidget {
     final user = ref.watch(userProvider);
 
     return Scaffold(
+      drawer: const ThemeDrawer(),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -82,6 +84,45 @@ class HomePage extends ConsumerWidget {
               ),
             ),
           ]),
+    );
+  }
+}
+
+class ThemeDrawer extends StatelessWidget {
+  const ThemeDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 104,
+            child: DrawerHeader(
+                padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
+                decoration:
+                    BoxDecoration(color: Theme.of(context).colorScheme.primary),
+                child: Text(
+                  'Dev Panel',
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 44,
+                        fontWeight: FontWeight.w300,
+                      ),
+                )),
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              return ListTile(
+                  title: const Text("Toggle"),
+                  onTap: () {
+                    ref.read(darkModeProvider.notifier).toggle();
+                  });
+            },
+          ),
+        ],
+      ),
     );
   }
 }

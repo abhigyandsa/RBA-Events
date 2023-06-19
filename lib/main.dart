@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:rba/pages/home_page.dart';
 import 'package:rba/pages/login_page.dart';
 import 'package:rba/pages/qr_scanner_page.dart';
+import 'package:rba/providers/theme_provider.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/user_information.dart';
 import 'firebase_options.dart';
@@ -51,6 +52,7 @@ class MyApp extends ConsumerWidget {
       }
     });
 
+    final darkMode = ref.watch(darkModeProvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'RBA Events',
@@ -67,7 +69,7 @@ class MyApp extends ConsumerWidget {
         useMaterial3: true,
       ),
       darkTheme: ThemeData.dark(useMaterial3: true),
-      themeMode: ThemeMode.dark,
+      themeMode: darkMode ? ThemeMode.light : ThemeMode.dark,
       routes: {
         '/login': (context) => const LoginPage(),
         '/main': (context) => const StartPage(),

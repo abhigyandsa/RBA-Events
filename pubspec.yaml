@@ -46,6 +46,8 @@ dependencies:
   pretty_qr_code: ^2.0.3
   font_awesome_flutter: ^10.4.0
   lottie: ^2.4.0
+  shared_preferences: ^2.1.2
+  text_scroll: ^0.2.0
 
 dev_dependencies:
   flutter_test:
