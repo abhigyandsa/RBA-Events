@@ -34,7 +34,7 @@ class MyOutlineButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             icon,
-            SizedBox(width: 15),
+            const SizedBox(width: 15),
             Text(
               text,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(

@@ -17,7 +17,7 @@ class QRCode extends StatelessWidget {
       child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: PrettyQr(
-            image: AssetImage('assets/2ndiris.png'),
+            image: const AssetImage('assets/2ndiris.png'),
             // typeNumber: 3,
             size: 256,
             data: text,

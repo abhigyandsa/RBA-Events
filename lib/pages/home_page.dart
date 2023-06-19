@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rba/pages/login_page.dart';
 import 'package:rba/providers/qr_data_provider.dart';
 import 'package:rba/providers/user_provider.dart';
@@ -17,7 +16,7 @@ class StartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final value = ref.watch(userProvider);
-    return value == null ? LoginPage() : HomePage2();
+    return value == null ? const LoginPage() : const HomePage2();
   }
 }
 
@@ -34,16 +33,16 @@ class HomePage2 extends ConsumerWidget {
         children: [
           Text(
             user.toString(),
-            style: TextStyle(fontSize: 11),
+            style: const TextStyle(fontSize: 11),
           ),
           TextButton(
             onPressed: () async {
-              UserInformation ui = UserInformation(
+              UserInformation ui = const UserInformation(
                   email: "i21jains@iimidr.ac.in",
                   name: "Saumya J",
                   phone: "9833780180",
                   adminlevel: 9);
-              UserInformation ui2 = UserInformation(
+              UserInformation ui2 = const UserInformation(
                   email: "abhigyandsa@gmail.com",
                   name: "Abhigyan D",
                   phone: "9875340025",
@@ -51,7 +50,7 @@ class HomePage2 extends ConsumerWidget {
               await ui.postUserInformation();
               await ui2.postUserInformation();
             },
-            child: Text('Post'),
+            child: const Text('Post'),
           ),
         ],
       )),
@@ -87,12 +86,12 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Icon(Icons.camera_alt),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               ElevatedButton(
@@ -102,27 +101,27 @@ class HomePage extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => Scaffold(
                         appBar: AppBar(
-                          title: Text('QR code Generator'),
+                          title: const Text('QR code Generator'),
                         ),
-                        body: TextFieldWithQR(),
+                        body: const TextFieldWithQR(),
                       ),
                     ),
                   );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Icon(Icons.sailing_rounded),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               ElevatedButton(
                 onPressed: () async {
                   await FirebaseAuthHelper.signOut();
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Icon(Icons.logout_outlined),
                 ),
               ),
@@ -153,7 +152,7 @@ class HomePage extends StatelessWidget {
                           Text(value),
                         ],
                       )
-                    : SizedBox.shrink(),
+                    : const SizedBox.shrink(),
                 qrCode != 'default'
                     ? Column(
                         children: [
@@ -161,7 +160,7 @@ class HomePage extends StatelessWidget {
                           Text(qrCode?.email ?? 'default'),
                         ],
                       )
-                    : SizedBox.shrink()
+                    : const SizedBox.shrink()
               ],
             );
           }),

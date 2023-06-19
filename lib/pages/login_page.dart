@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
             alignment: Alignment.topRight,
             child: Container(
               height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/wavy_background.png'),
                   fit: BoxFit.fill,
@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Column(
               children: [
-                Spacer(),
+                const Spacer(),
                 //need to add Sized boxes for this more buttons.
                 Consumer(builder: (context, ref, child) {
                   return IntrinsicWidth(
@@ -57,27 +57,27 @@ class LoginPage extends StatelessWidget {
                             onPressed: () async {
                               await FirebaseAuthHelper.signInWithGoogle();
                             },
-                            icon: FaIcon(FontAwesomeIcons.google),
+                            icon: const FaIcon(FontAwesomeIcons.google),
                             text: "Google"),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                         MyOutlineButton(
                             onPressed: () async {
                               await FirebaseAuthHelper.signInWithGoogle();
                             },
-                            icon: FaIcon(FontAwesomeIcons.microsoft),
+                            icon: const FaIcon(FontAwesomeIcons.microsoft),
                             text: "Microsoft"),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                         MyOutlineButton(
                             onPressed: () async {
                               await FirebaseAuthHelper.signInWithGoogle();
                             },
-                            icon: FaIcon(FontAwesomeIcons.facebook),
+                            icon: const FaIcon(FontAwesomeIcons.facebook),
                             text: "Facebook"),
                       ],
                     ),
                   );
                 }),
-                SizedBox(height: 104),
+                const SizedBox(height: 104),
                 Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: TextButton(
@@ -90,10 +90,10 @@ class LoginPage extends StatelessWidget {
                           FontAwesomeIcons.water,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                         ),
-                        Text('Made with Bacon!'),
+                        const Text('Made with Bacon!'),
                       ],
                     ),
                   ),

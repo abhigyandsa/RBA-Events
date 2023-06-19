@@ -33,7 +33,7 @@ class _TextFieldWithQRState extends State<TextFieldWithQR> {
           padding: const EdgeInsets.all(20.0),
           child: controller.text.length < 25
               ? PrettyQr(
-                  image: AssetImage('assets/2ndiris.png'),
+                  image: const AssetImage('assets/2ndiris.png'),
                   typeNumber: 3,
                   size: 256,
                   data: controller.text,
