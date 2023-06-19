@@ -18,6 +18,7 @@ class UserNotifier extends Notifier<UserInformation?> {
   void getUsrData() async {
     final email = state!.email;
     final db = FirebaseFirestore.instance;
+
     await db.collection("users").get().then((event) {
       DocumentReference<Map<String, dynamic>>? docRef = null;
       for (var doc in event.docs) {

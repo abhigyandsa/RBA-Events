@@ -57,40 +57,40 @@ class UserInformation {
   }
 }
 
-class UserListScreen extends StatelessWidget {
-  const UserListScreen({Key? key}) : super(key: key);
+// class UserListScreen extends StatelessWidget {
+//   const UserListScreen({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('users').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        }
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder<QuerySnapshot>(
+//       stream: FirebaseFirestore.instance.collection('users').snapshots(),
+//       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//         if (snapshot.hasError) {
+//           return Text('Error: ${snapshot.error}');
+//         }
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return const CircularProgressIndicator();
+//         }
 
-        if (!snapshot.hasData) {
-          return const CircularProgressIndicator();
-        }
+//         if (!snapshot.hasData) {
+//           return const CircularProgressIndicator();
+//         }
 
-        final userList = snapshot.data?.docs ?? [];
-        return ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: userList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final userData = userList[index].data() ?? {};
-            final name = (userData as Map)['name'];
-            return ListTile(
-              title: Text(name ?? ''),
-            );
-          },
-        );
-      },
-    );
-  }
-}
+//         final userList = snapshot.data?.docs ?? [];
+//         return ListView.builder(
+//           scrollDirection: Axis.vertical,
+//           shrinkWrap: true,
+//           itemCount: userList.length,
+//           itemBuilder: (BuildContext context, int index) {
+//             final userData = userList[index].data() ?? {};
+//             final name = (userData as Map)['name'];
+//             return ListTile(
+//               title: Text(name ?? ''),
+//             );
+//           },
+//         );
+//       },
+//     );
+//   }
+// }

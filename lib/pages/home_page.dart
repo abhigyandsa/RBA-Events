@@ -1,16 +1,11 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rba/pages/login_page.dart';
-import 'package:rba/providers/qr_data_provider.dart';
 import 'package:rba/providers/user_provider.dart';
-import 'package:rba/services/firebase_auth_helper.dart';
 import 'package:rba/services/user_information.dart';
-import 'package:rba/widgets/cute_qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:rba/widgets/mydrawer.dart';
 import 'package:rba/widgets/qr_scanner.dart';
-import 'package:rba/widgets/textfield_withqr.dart';
 
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
@@ -18,12 +13,12 @@ class StartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final value = ref.watch(userProvider);
-    return value == null ? const LoginPage() : const HomePage2();
+    return value == null ? const LoginPage() : const HomePage();
   }
 }
 
-class HomePage2 extends ConsumerWidget {
-  const HomePage2({super.key});
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -91,109 +86,109 @@ class HomePage2 extends ConsumerWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+// class HomePage extends StatelessWidget {
+//   const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Scanner(),
-                    ),
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.camera_alt),
-                ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        appBar: AppBar(
-                          title: const Text('QR code Generator'),
-                        ),
-                        body: const TextFieldWithQR(),
-                      ),
-                    ),
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.sailing_rounded),
-                ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await FirebaseAuthHelper.signOut();
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.logout_outlined),
-                ),
-              ),
-            ],
-          ),
-          Consumer(builder: (_, WidgetRef ref, __) {
-            final value = ref.watch(qrdataProvider);
-            final qrCode = ref.watch(userProvider);
-            return Column(
-              children: [
-                value != null
-                    ? Column(
-                        children: [
-                          Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: PrettyQr(
-                                // typeNumber: 3,
-                                size: 256,
-                                data: value,
-                                roundEdges: true,
-                              ),
-                            ),
-                          ),
-                          Text(value),
-                        ],
-                      )
-                    : const SizedBox.shrink(),
-                qrCode != null
-                    ? Column(
-                        children: [
-                          QRCode(text: qrCode.email),
-                          Text(qrCode.email),
-                        ],
-                      )
-                    : const SizedBox.shrink()
-              ],
-            );
-          }),
-        ], // children
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Theme.of(context).colorScheme.background,
+//       body: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               ElevatedButton(
+//                 onPressed: () {
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => const Scanner(),
+//                     ),
+//                   );
+//                 },
+//                 child: const Padding(
+//                   padding: EdgeInsets.all(8.0),
+//                   child: Icon(Icons.camera_alt),
+//                 ),
+//               ),
+//               const SizedBox(
+//                 width: 15,
+//               ),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => Scaffold(
+//                         appBar: AppBar(
+//                           title: const Text('QR code Generator'),
+//                         ),
+//                         body: const TextFieldWithQR(),
+//                       ),
+//                     ),
+//                   );
+//                 },
+//                 child: const Padding(
+//                   padding: EdgeInsets.all(8.0),
+//                   child: Icon(Icons.sailing_rounded),
+//                 ),
+//               ),
+//               const SizedBox(
+//                 width: 15,
+//               ),
+//               ElevatedButton(
+//                 onPressed: () async {
+//                   await FirebaseAuthHelper.signOut();
+//                 },
+//                 child: const Padding(
+//                   padding: EdgeInsets.all(8.0),
+//                   child: Icon(Icons.logout_outlined),
+//                 ),
+//               ),
+//             ],
+//           ),
+//           Consumer(builder: (_, WidgetRef ref, __) {
+//             final value = ref.watch(qrdataProvider);
+//             final qrCode = ref.watch(userProvider);
+//             return Column(
+//               children: [
+//                 value != null
+//                     ? Column(
+//                         children: [
+//                           Card(
+//                             color: Colors.white,
+//                             shape: RoundedRectangleBorder(
+//                                 borderRadius: BorderRadius.circular(20)),
+//                             child: Padding(
+//                               padding: const EdgeInsets.all(20.0),
+//                               child: PrettyQr(
+//                                 // typeNumber: 3,
+//                                 size: 256,
+//                                 data: value,
+//                                 roundEdges: true,
+//                               ),
+//                             ),
+//                           ),
+//                           Text(value),
+//                         ],
+//                       )
+//                     : const SizedBox.shrink(),
+//                 qrCode != null
+//                     ? Column(
+//                         children: [
+//                           QRCode(text: qrCode.email),
+//                           Text(qrCode.email),
+//                         ],
+//                       )
+//                     : const SizedBox.shrink()
+//               ],
+//             );
+//           }),
+//         ], // children
+//       ),
+//     );
+//   }
+// }
