@@ -29,6 +29,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // react to changes in the auth state
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       print("trigger");
       if (user == null) {
@@ -41,7 +42,7 @@ class MyApp extends ConsumerWidget {
         }
       }
     });
-
+    // react to changes in the user data
     ref.listen<UserInformation?>(userProvider, (previous, value) {
       if (previous == null && value != null) {
         ref.read(userProvider.notifier).getUsrData();
