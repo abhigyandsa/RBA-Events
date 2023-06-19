@@ -13,18 +13,18 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/wavy_background.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.topRight,
+          //   child: Container(
+          //     height: MediaQuery.of(context).size.height,
+          //     decoration: const BoxDecoration(
+          //       image: DecorationImage(
+          //         image: AssetImage('assets/images/wavy_background.png'),
+          //         fit: BoxFit.fill,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Positioned(
             top: 0,
             left: 0,

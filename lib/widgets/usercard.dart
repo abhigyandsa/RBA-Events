@@ -31,33 +31,26 @@ class UserCard extends StatelessWidget {
             padding: const EdgeInsets.only(top: 56.0),
             child: Column(
               children: [
-                Column(
-                  children: [
-                    Text(
-                      user.name ?? 'N/A',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      user.phone ?? '+91 1234567890',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                    ),
-                    Text(user.email,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            )),
-                    SizedBox(
-                      height: 256 + 8,
-                      child: QRCode(text: user.email),
-                    ),
-                  ],
+                Text(
+                  user.name ?? 'N/A',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  user.phone ?? '+91 1234567890',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+                Text(user.email,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        )),
+                SizedBox(
+                  height: 256 + 8,
+                  child: QRCode(text: user.email),
                 ),
               ],
             ),
