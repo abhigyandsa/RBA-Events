@@ -29,7 +29,7 @@ class MyOutlineButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

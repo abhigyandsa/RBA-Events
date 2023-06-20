@@ -5,6 +5,7 @@ import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/user_information.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rba/widgets/devpanel.dart';
 import 'package:rba/widgets/mydrawer.dart';
 import 'package:rba/pages/qr_scanner_page.dart';
 
@@ -44,9 +45,9 @@ class HomePage extends ConsumerWidget {
                   phone: "9833780180",
                   adminlevel: 9);
               UserInformation ui2 = const UserInformation(
-                  email: "abhigyandsa@gmail.com",
-                  name: "Abhigyan D",
-                  phone: "9875340025",
+                  email: "shadowofthedeadwolves@gmail.com",
+                  name: "Arnab Ji",
+                  phone: "",
                   adminlevel: 9);
               await ui.postUserInformation();
               await ui2.postUserInformation();
@@ -61,7 +62,7 @@ class HomePage extends ConsumerWidget {
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.background,
           actions: [
-            admin > 9
+            admin >= 9
                 ? TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -87,45 +88,6 @@ class HomePage extends ConsumerWidget {
               ),
             ),
           ]),
-    );
-  }
-}
-
-class ThemeDrawer extends StatelessWidget {
-  const ThemeDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: 104,
-            child: DrawerHeader(
-                padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
-                decoration:
-                    BoxDecoration(color: Theme.of(context).colorScheme.primary),
-                child: Text(
-                  'Dev Panel',
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontSize: 44,
-                        fontWeight: FontWeight.w300,
-                      ),
-                )),
-          ),
-          Consumer(
-            builder: (context, ref, child) {
-              return ListTile(
-                  title: const Text("Toggle"),
-                  onTap: () {
-                    ref.read(darkModeProvider.notifier).toggle();
-                  });
-            },
-          ),
-        ],
-      ),
     );
   }
 }

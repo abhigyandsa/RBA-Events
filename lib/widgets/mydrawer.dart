@@ -16,6 +16,7 @@ class MyDrawer extends ConsumerWidget {
 
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.background,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -41,22 +42,25 @@ class MyDrawer extends ConsumerWidget {
             child: UserCard(user: user!),
           ),
           const Spacer(),
-          FilledButton(
-            onPressed: () async {
+          ListTile(
+            tileColor: Theme.of(context).colorScheme.primary,
+            onTap: () async {
               await FirebaseAuthHelper.signOut();
             },
-            style: FilledButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              padding: EdgeInsets.zero,
-            ),
-            child: const Row(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
               children: [
-                Text("Logout "),
-                FaIcon(FontAwesomeIcons.arrowRightFromBracket),
+                Text("Logout",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        )),
+                const SizedBox(
+                  width: 16,
+                ),
+                FaIcon(
+                  FontAwesomeIcons.arrowRightFromBracket,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ],
             ),
           ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rba/providers/theme_provider.dart';
 import 'package:rba/services/firebase_auth_helper.dart';
+import 'package:rba/widgets/devpanel.dart';
 import 'package:rba/widgets/my_outline_button.dart';
 
 class LoginPage extends StatelessWidget {
@@ -10,7 +12,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      drawer: const ThemeDrawer(),
       body: Stack(
         children: [
           // Align(
@@ -28,18 +30,25 @@ class LoginPage extends StatelessWidget {
           Positioned(
             top: 0,
             left: 0,
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  "Login",
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w200,
-                        fontSize: 100,
-                      ),
+            child: Column(
+              children: [
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      "Login",
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w200,
+                            fontSize: 104,
+                          ),
+                    ),
+                  ),
                 ),
-              ),
+                Divider(
+                    color: Theme.of(context).colorScheme.primary,
+                    thickness: 100),
+              ],
             ),
           ),
           Align(
@@ -59,14 +68,14 @@ class LoginPage extends StatelessWidget {
                             },
                             icon: const FaIcon(FontAwesomeIcons.google),
                             text: "Google"),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 8),
                         MyOutlineButton(
                             onPressed: () async {
                               await FirebaseAuthHelper.signInWithGoogle();
                             },
                             icon: const FaIcon(FontAwesomeIcons.microsoft),
                             text: "Microsoft"),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 8),
                         MyOutlineButton(
                             onPressed: () async {
                               await FirebaseAuthHelper.signInWithGoogle();
@@ -80,22 +89,26 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 164),
                 Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.water,
-                          color: Theme.of(context).colorScheme.primary,
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      return TextButton(
+                        onPressed: () => Scaffold.of(context).openDrawer(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.water,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            const Text('Made with Bacon!'),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        const Text('Made with Bacon!'),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ),
               ],

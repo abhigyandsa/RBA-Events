@@ -71,7 +71,8 @@ class MyApp extends ConsumerWidget {
         ),
         useMaterial3: true,
       ),
-      darkTheme: ThemeData.dark(useMaterial3: true),
+      darkTheme: ThemeData.dark(useMaterial3: true)
+          .copyWith(scaffoldBackgroundColor: Colors.black),
       themeMode: darkMode ? ThemeMode.light : ThemeMode.dark,
       routes: {
         '/login': (context) => const LoginPage(),

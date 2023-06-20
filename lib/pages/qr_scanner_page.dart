@@ -16,7 +16,10 @@ class _ScannerState extends ConsumerState<Scanner> {
   @override
   void initState() {
     super.initState();
-    _cameraController = MobileScannerController();
+    _cameraController = MobileScannerController(
+      // detectionSpeed: DetectionSpeed.noDuplicates,
+      detectionTimeoutMs: 10000,
+    );
   }
 
   @override
