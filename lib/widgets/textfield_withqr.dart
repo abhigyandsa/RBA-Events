@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
+class TextFieldPage extends StatelessWidget {
+  const TextFieldPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('QR Generator'),
+      ),
+      body: const TextFieldWithQR(),
+    );
+  }
+}
+
 class TextFieldWithQR extends StatefulWidget {
   const TextFieldWithQR({super.key});
 

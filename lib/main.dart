@@ -6,6 +6,7 @@ import 'package:rba/pages/qr_scanner_page.dart';
 import 'package:rba/providers/theme_provider.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/user_information.dart';
+import 'package:rba/widgets/textfield_withqr.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -78,6 +79,7 @@ class MyApp extends ConsumerWidget {
         '/login': (context) => const LoginPage(),
         '/main': (context) => const StartPage(),
         '/scanner': (context) => const Scanner(),
+        '/qrgenerator': (context) => const TextFieldPage(),
         // '/scanned_data': (context) => const StartPage(),
       },
       home: const StartPage(),

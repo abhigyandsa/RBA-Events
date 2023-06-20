@@ -45,6 +45,12 @@ class ThemeDrawer extends ConsumerWidget {
               Navigator.of(context).pushNamed('/scanner');
             },
           ),
+          ListTile(
+            title: const Text("QR Generator"),
+            onTap: () {
+              Navigator.of(context).pushNamed('/qrgenerator');
+            },
+          ),
         ],
       ),
     );
