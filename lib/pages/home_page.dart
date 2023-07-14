@@ -1,6 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rba/pages/login_page.dart';
-import 'package:rba/providers/theme_provider.dart';
 import 'package:rba/providers/user_provider.dart';
 import 'package:rba/services/user_information.dart';
 import 'package:flutter/material.dart';
